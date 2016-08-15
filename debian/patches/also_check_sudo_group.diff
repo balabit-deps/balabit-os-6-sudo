@@ -1,0 +1,19 @@
+Description: also check the sudo group to create the admin flag file
+Author: Marc Deslauriers <marc.deslauriers@canonical.com>
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/sudo/+bug/1387347
+Updated: 2016-03-30
+
+Index: sudo-1.8.15/plugins/sudoers/sudoers.c
+===================================================================
+--- sudo-1.8.15.orig/plugins/sudoers/sudoers.c	2016-03-30 08:07:41.239885338 -0400
++++ sudo-1.8.15/plugins/sudoers/sudoers.c	2016-03-30 08:08:27.792347977 -0400
+@@ -1236,7 +1236,8 @@
+     debug_decl(create_admin_success_flag, SUDOERS_DEBUG_PLUGIN)
+ 
+     /* Check whether the user is in the admin group. */
+-    if (!user_in_group(sudo_user.pw, "admin"))
++    if (!user_in_group(sudo_user.pw, "admin") &&
++	!user_in_group(sudo_user.pw, "sudo"))
+ 	debug_return_int(true);
+ 
+     /* Build path to flag file. */

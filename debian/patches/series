@@ -1,0 +1,5 @@
+typo-in-classic-insults.diff
+paths-in-samples.diff
+keep_home_by_default.patch
+also_check_sudo_group.diff
+lp1565567.patch

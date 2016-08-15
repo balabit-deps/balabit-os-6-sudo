@@ -1,0 +1,13 @@
+Index: sudo/plugins/sudoers/ins_classic.h
+===================================================================
+--- sudo.orig/plugins/sudoers/ins_classic.h	2013-10-22 17:28:58.841574523 -0400
++++ sudo/plugins/sudoers/ins_classic.h	2013-10-22 17:28:58.837574523 -0400
+@@ -30,7 +30,7 @@
+     "Where did you learn to type?",
+     "Are you on drugs?",
+     "My pet ferret can type better than you!",
+-    "You type like i drive.",
++    "You type like I drive.",
+     "Do you think like you type?",
+     "Your mind just hasn't been the same since the electro-shock, has it?",
+ 
