@@ -1,3 +1,20 @@
+sudo (1.8.16-0ubuntu1.4) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: /proc/self/stat parsing confusion
+    - debian/patches/CVE-2017-1000367.patch: adjust parsing to
+      find ttyname
+    - CVE-2017-1000367
+
+ -- Steve Beattie <sbeattie@ubuntu.com>  Mon, 29 May 2017 03:17:46 -0700
+
+sudo (1.8.16-0ubuntu1.3) xenial; urgency=medium
+
+  * sssd-doesnt-handle-netgroups.diff, sssd-fix-matching-loop.diff:
+    Only check username as part of the netgroup when netgroup_tuple is enabled.
+    (LP: #1607666)
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Sat, 14 Jan 2017 01:54:21 +0200
+
 sudo (1.8.16-0ubuntu1.2) xenial; urgency=medium
 
   * debian/sudoers:

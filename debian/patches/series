@@ -3,3 +3,6 @@ paths-in-samples.diff
 keep_home_by_default.patch
 also_check_sudo_group.diff
 lp1565567.patch
+sssd-doesnt-handle-netgroups.diff
+sssd-fix-matching-loop.diff
+CVE-2017-1000367.patch

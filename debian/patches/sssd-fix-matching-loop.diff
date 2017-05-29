@@ -1,0 +1,29 @@
+# HG changeset patch
+# User Todd C. Miller <Todd.Miller@courtesan.com>
+# Date 1464984460 21600
+# Node ID 2eab4070dcf7119200e46488932b8814e4f8a02b
+# Parent  f976b3d973e038c161546b6bcc1c8f494857e0be
+When matching host, short-circuit the loop when we get a match.
+Only check username as part of the netgroup when netgroup_tuple is
+enabled.
+
+--- a/plugins/sudoers/sssd.c
++++ b/plugins/sudoers/sssd.c
+@@ -668,13 +668,14 @@ sudo_sss_check_host(struct sudo_sss_hand
+     }
+ 
+     /* walk through values */
+-    for (i = 0; val_array[i] != NULL; ++i) {
++    for (i = 0; val_array[i] != NULL && !ret; ++i) {
+ 	val = val_array[i];
+ 	sudo_debug_printf(SUDO_DEBUG_DEBUG, "val[%d]=%s", i, val);
+ 
+ 	/* match any or address or netgroup or hostname */
+-	if (!strcmp(val, "ALL") || addr_matches(val) || netgr_matches(val,
+-	    user_runhost, user_srunhost, handle->pw->pw_name) ||
++	if (!strcmp(val, "ALL") || addr_matches(val) ||
++	    netgr_matches(val, user_runhost, user_srunhost,
++	    def_netgroup_tuple ? handle->pw->pw_name: NULL) ||
+ 	    hostname_matches(user_srunhost, user_runhost, val))
+ 	    ret = true;
+ 
