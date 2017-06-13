@@ -1,3 +1,11 @@
+sudo (1.8.16-0ubuntu1.5) xenial; urgency=medium
+
+  * Terminate with the same signal as the command (LP: #1686803)
+    This fixes a regression introduced in sudo 1.8.15 changeset
+    10229:153f016db8f1.
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Tue, 13 Jun 2017 11:10:50 +0200
+
 sudo (1.8.16-0ubuntu1.4) xenial-security; urgency=medium
 
   * SECURITY UPDATE: /proc/self/stat parsing confusion

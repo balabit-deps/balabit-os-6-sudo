@@ -1,0 +1,22 @@
+
+# HG changeset patch
+# User Todd C. Miller <Todd.Miller@courtesan.com>
+# Date 1493259454 21600
+# Node ID 50b988d0c97fa0bf0521a01ac2711bc41f81450e
+# Parent  93de5e34a6a374cfca7b98619e403d5060ac167d
+The fix for Bug #722 contained a typo/thinko that resulted in the
+exit status being 0 when a command was killed by a signal other
+than SIGINT.  This fixes the signal handler setup so sudo will
+terminate with the same signal as the command.  Bug #784.
+
+--- a/src/sudo.c
++++ b/src/sudo.c
+@@ -324,7 +324,7 @@
+ 	memset(&sa, 0, sizeof(sa));
+ 	sigemptyset(&sa.sa_mask);
+ 	sa.sa_handler = SIG_DFL;
+-	sigaction(SIGINT, &sa, NULL);
++	sigaction(WTERMSIG(status), &sa, NULL);
+ 	sudo_debug_exit_int(__func__, __FILE__, __LINE__, sudo_debug_subsys,
+ 	    WTERMSIG(status) | 128);                
+ 	kill(getpid(), WTERMSIG(status));
