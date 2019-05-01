@@ -1,0 +1,40 @@
+changeset:   10994:c198d1317560
+Author:      Todd C. Miller <Todd.Miller@courtesan.com>
+date:        Sat Jun 03 08:45:29 2017 -0600
+files:       src/ttyname.c
+description:
+Avoid sign extension when assigning the value of tty_nr in
+/proc/self/stat on Linux.  It is an unsigned int value that
+is printed as a signed int but dev_t is unsigned long long.
+We need to cast to unsigned int before assigning to a dev_t.
+
+
+ src/ttyname.c |  11 +++++++++--
+ 1 files changed, 9 insertions(+), 2 deletions(-)
+
+Index: sudo-1.8.16/src/ttyname.c
+===================================================================
+--- sudo-1.8.16.orig/src/ttyname.c	2019-05-01 11:22:52.142537122 -0400
++++ sudo-1.8.16/src/ttyname.c	2019-05-01 11:22:52.138537121 -0400
+@@ -489,12 +489,19 @@ get_process_ttyname(char *name, size_t n
+ 		    if (*ep == ' ') {
+ 			*ep = '\0';
+ 			if (++field == 7) {
+-			    dev_t tdev = strtonum(cp, INT_MIN, INT_MAX, &errstr);
++			    int tty_nr = strtonum(cp, INT_MIN, INT_MAX, &errstr);
+ 			    if (errstr) {
+ 				sudo_debug_printf(SUDO_DEBUG_ERROR|SUDO_DEBUG_LINENO,
+ 				    "%s: tty device %s: %s", path, cp, errstr);
+ 			    }
+-			    if (tdev > 0) {
++			    if (tty_nr != 0) {
++				/*
++				 * Avoid sign extension when assigning tdev.
++				 * tty_nr in /proc/self/stat is printed as a
++				 * signed int but the actual device number is an
++				 * unsigned int and dev_t is unsigned long long.
++				 */
++				dev_t tdev = (unsigned int)tty_nr;
+ 				errno = serrno;
+ 				rval = sudo_ttyname_dev(tdev, name, namelen);
+ 				goto done;

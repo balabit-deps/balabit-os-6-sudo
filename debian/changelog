@@ -1,3 +1,21 @@
+sudo (1.8.16-0ubuntu1.6) xenial-security; urgency=medium
+
+  [ Steve Beattie ]
+  * SECURITY UPDATE: /proc/self/stat parsing newline confusion
+    - debian/patches/CVE-2017-1000368.patch: read all lines of
+      /proc/self/stat
+    - CVE-2017-1000368
+  * debian/patches/avoid_sign_extension_tty_nr.patch: hardening to
+    ensure sign extension doesn't occur when parsing /proc/self/stat
+
+  [ Marc Deslauriers ]
+  * SECURITY UPDATE: sudo noexec bypass
+    - debian/patches/CVE-2016-7076-*.patch: wrap wordexp, add seccomp
+      filter.
+    - CVE-2016-7076
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 01 May 2019 11:30:39 -0400
+
 sudo (1.8.16-0ubuntu1.5) xenial; urgency=medium
 
   * Terminate with the same signal as the command (LP: #1686803)
