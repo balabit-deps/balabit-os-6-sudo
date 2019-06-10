@@ -1,3 +1,10 @@
+sudo (1.8.16-0ubuntu1.7) xenial-security; urgency=medium
+
+  * debian/patches/terminate-with-commands-signal.patch: re-enable patch
+    that got dropped by mistake in previous upload. (LP: #1832257)
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Mon, 10 Jun 2019 15:42:44 -0400
+
 sudo (1.8.16-0ubuntu1.6) xenial-security; urgency=medium
 
   [ Steve Beattie ]

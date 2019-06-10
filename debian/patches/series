@@ -6,6 +6,7 @@ lp1565567.patch
 sssd-doesnt-handle-netgroups.diff
 sssd-fix-matching-loop.diff
 CVE-2017-1000367.patch
+terminate-with-commands-signal.patch
 CVE-2017-1000368.patch
 avoid_sign_extension_tty_nr.patch
 CVE-2016-7076-1.patch
