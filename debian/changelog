@@ -1,3 +1,17 @@
+sudo (1.8.16-0ubuntu1.8) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: privilege escalation via UID -1
+    - debian/patches/CVE-2019-14287.patch: treat an ID of -1 as invalid
+      in lib/util/strtoid.c.
+    - CVE-2019-14287
+    - debian/patches/CVE-2019-14287-2.patch: fix and add to tests in
+      lib/util/regress/atofoo/atofoo_test.c,
+      plugins/sudoers/regress/testsudoers/test5.out.ok,
+      plugins/sudoers/regress/testsudoers/test5.sh.
+    - CVE-2019-14287
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 10 Oct 2019 14:47:22 -0400
+
 sudo (1.8.16-0ubuntu1.7) xenial-security; urgency=medium
 
   * debian/patches/terminate-with-commands-signal.patch: re-enable patch
