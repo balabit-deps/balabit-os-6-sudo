@@ -1,3 +1,11 @@
+sudo (1.8.16-0ubuntu1.9) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: buffer overflow in sudo when pwfeedback is enabled
+    - debian/patches/CVE-2019-18634.patch: fix overflow in src/tgetpass.c.
+    - CVE-2019-18634
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Fri, 31 Jan 2020 12:19:11 -0500
+
 sudo (1.8.16-0ubuntu1.8) xenial-security; urgency=medium
 
   * SECURITY UPDATE: privilege escalation via UID -1
