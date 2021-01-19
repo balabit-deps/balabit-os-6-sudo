@@ -1,3 +1,30 @@
+sudo (1.8.16-0ubuntu1.10) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: dir existence issue via sudoedit race
+    - debian/patches/CVE-2021-23239.patch: fix potential directory existing
+      info leak in sudoedit in src/sudo_edit.c.
+    - CVE-2021-23239
+  * SECURITY UPDATE: heap-based buffer overflow
+    - debian/patches/CVE-2021-3156-pre1.patch: check lock record size in
+      plugins/sudoers/timestamp.c.
+    - debian/patches/CVE-2021-3156-pre2.patch: sanity check size when
+      converting the first record to TS_LOCKEXCL in
+      plugins/sudoers/timestamp.c.
+    - debian/patches/CVE-2021-3156-1.patch: reset valid_flags to
+      MODE_NONINTERACTIVE for sudoedit in src/parse_args.c.
+    - debian/patches/CVE-2021-3156-2.patch: add sudoedit flag checks in
+      plugin in plugins/sudoers/policy.c.
+    - debian/patches/CVE-2021-3156-3.patch: fix potential buffer overflow
+      when unescaping backslashes in plugins/sudoers/sudoers.c.
+    - debian/patches/CVE-2021-3156-4.patch: fix the memset offset when
+      converting a v1 timestamp to TS_LOCKEXCL in
+      plugins/sudoers/timestamp.c.
+    - debian/patches/CVE-2021-3156-5.patch: don't assume that argv is
+      allocated as a single flat buffer in src/parse_args.c.
+    - CVE-2021-3156
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Tue, 19 Jan 2021 09:48:09 -0500
+
 sudo (1.8.16-0ubuntu1.9) xenial-security; urgency=medium
 
   * SECURITY UPDATE: buffer overflow in sudo when pwfeedback is enabled
